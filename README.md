@@ -63,6 +63,7 @@ JOIN genres ON books.id = genres.id;
 ```
 ![image](https://github.com/Anastasia567874/lab_bd/assets/144477949/5fe8365e-1007-4627-8119-1380f7ca0d75)
 
+<img src="https://github.com/Anastasia567874/lab_bd/assets/144477949/5fe8365e-1007-4627-8119-1380f7ca0d75" width="200" height="200">
 
 Теперь попробуй самостоятельно вывести:
 
