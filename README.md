@@ -77,6 +77,7 @@ JOIN genres ON books.id = genres.id;
 ![image](https://github.com/Anastasia567874/lab_bd/assets/144477949/a5f7dd61-fecd-4155-bc46-92ba2f073b02)
 
 Разберем основные моменты:
+
 Создадим функцию, которая будет использоваться для подключения. Для начала нужно создать движок, который создается один раз и хранит в себе все подключения к серверу БД:
 ```
 engine = sa.create_engine(conn_str, echo=True)
