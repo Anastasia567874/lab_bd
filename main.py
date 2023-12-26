@@ -2,37 +2,32 @@ from data import db_session
 from data.db_session import create_session, global_init
 from data.books import Book
 from data.genres import Genre
-import os
+from sqlalchemy import exists
 
 db_session.global_init("db/book_store.db")
 
 
 def create_book(form):
     db_sess = db_session.create_session()
-    db_sess = db_session.create_session()
-    if form['genreother']:
-        new_genre = form['genreother']
-        db_sess = db_session.create_session()
-        genre = Genre(
-            title=form['genreother']
-        )
-        db_sess.add(genre)
-        db_sess.commit()
-        db_sess = db_session.create_session()
-        genre_oth = db_sess.query(Genre).filter(Genre.title == new_genre).first().id
+    genre_exists = db_sess.query(exists().where(Genre.title == form['genre'])).scalar()
+    if genre_exists:
+        genre = db_sess.query(Genre).filter(Genre.title == form['genre']).first().id
     else:
-        genre_oth = form['genre']
+        genre_new = Genre(title=form['genre'])
+        db_sess.add(genre_new)
+        db_sess.commit()
     book = Book(
         title=form['title'],
         author=form['author'],
         age_limit=form['age_limit'],
         annotation=form['annotation'],
-        genre_id=genre_oth,
-        reviews=''
+        genre_id=genre
+
     )
     db_sess.add(book)
     db_sess.commit()
     return "Успешно"
+
 
 
 def del_book(book_id):
