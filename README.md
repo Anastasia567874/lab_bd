@@ -55,7 +55,8 @@ FROM books
 JOIN genres ON books.id = genres.id;
 ```
 
-![image](https://github.com/Anastasia567874/lab_bd/assets/144477949/5fe8365e-1007-4627-8119-1380f7ca0d75)
+![image](https://github.com/Anastasia567874/lab_bd/assets/144477949/2e90af3b-1c56-4b26-9656-bef11f5abd92)
+
 
 Теперь попробуй самостоятельно вывести, это твоё первое задание:
 1) Все книги с жанром "Роман".
