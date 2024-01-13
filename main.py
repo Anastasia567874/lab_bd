@@ -10,18 +10,16 @@ db_session.global_init("db/book_store.db")
 def create_book(form):
     db_sess = db_session.create_session()
     genre_exists = db_sess.query(exists().where(Genre.title == form['genre'])).scalar()
-    if genre_exists:
-        genre = db_sess.query(Genre).filter(Genre.title == form['genre']).first().id
-    else:
-        genre = Genre(title=form['genre'])
-        db_sess.add(genre)
+    if not genre_exists:
+        genre_new = Genre(title=form['genre'])
+        db_sess.add(genre_new)
         db_sess.commit()
     book = Book(
         title=form['title'],
         author=form['author'],
         age_limit=form['age_limit'],
         annotation=form['annotation'],
-        genre_id=genre
+        genre_id=form['genre']
 
     )
     db_sess.add(book)
