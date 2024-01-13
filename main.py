@@ -9,23 +9,26 @@ db_session.global_init("db/book_store.db")
 
 def create_book(form):
     db_sess = db_session.create_session()
-    genre_exists = db_sess.query(exists().where(Genre.title == form['genre'])).scalar()
-    if not genre_exists:
+    #db_sess.query(Genre).filter(Genre.title == new_genre).first().id
+    genre_exists = db_sess.query(Genre).filter(Genre.title == form['genre']).scalar()
+    if genre_exists:
+        genre = db_sess.query(Genre).filter(Genre.title == form['genre']).first().id
+    else:
         genre_new = Genre(title=form['genre'])
         db_sess.add(genre_new)
         db_sess.commit()
+        genre = genre_new.id
     book = Book(
         title=form['title'],
         author=form['author'],
         age_limit=form['age_limit'],
         annotation=form['annotation'],
-        genre_id=form['genre']
+        genre_id=genre
 
     )
     db_sess.add(book)
     db_sess.commit()
-    return "Успешно"
-
+    return "Успешно создана книга"
 
 
 def del_book(book_id):
@@ -48,13 +51,13 @@ def get_books():
 
 
 form1 = {'title':'KGBT+',
-         'author':'Апостол Павел',
+         'author':'Пелевин',
          'age_limit': 18,
             'annotation': """Книга представляет собой нечто среднее между мемуарами,
              тренингом по достижению успеха и сборником мемов. 
              Все это щедро приправлено фирменной авторской психоделикой, 
              без которой не обходится ни одно произведение Пелевина.""",
-'genreother': 'Роман'
+'genre': 'Роман'
          }
 
 
