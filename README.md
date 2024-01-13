@@ -124,7 +124,8 @@ genre_id = Column(Integer, ForeignKey("genres.id"))
 
 3. Основные функции для работы с БД.
    Рассмотрим функцию добавления новой книги.
-![image](https://github.com/Anastasia567874/lab_bd/assets/144477949/dd1e03ec-c303-4e3e-af78-09f83a69619c)
+![image](https://github.com/Anastasia567874/lab_bd/assets/144477949/b3d58e29-df54-49e0-b822-25ad209f5860)
+
 
 Взаимодействие с БД происходит через созданную ранее функцию создания сессии - create_session(), для удобства:
 ```
