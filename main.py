@@ -13,8 +13,8 @@ def create_book(form):
     if genre_exists:
         genre = db_sess.query(Genre).filter(Genre.title == form['genre']).first().id
     else:
-        genre_new = Genre(title=form['genre'])
-        db_sess.add(genre_new)
+        genre = Genre(title=form['genre'])
+        db_sess.add(genre)
         db_sess.commit()
     book = Book(
         title=form['title'],
